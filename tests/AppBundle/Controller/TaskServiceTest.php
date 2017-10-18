@@ -1,0 +1,71 @@
+<?php
+
+namespace Tests\AppBundle\Controller;
+
+use AppBundle\Service\TaskService;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManager;
+
+class TaskServiceTest extends WebTestCase
+{
+    private $taskService;
+    private $em;
+
+    public function setUp()
+    {
+        self::bootKernel();
+
+        $this->em = static::$kernel->getContainer()
+            ->get('doctrine')
+            ->getManager();
+
+        $this->taskService = new TaskService($this->em);
+    }
+
+    public function testInsert()
+    {
+        $request = new Request();
+        $request->request->replace(['title' => 'Testing inclusion']);
+
+        $jsonResult = $this->taskService->insert($request);
+        $taskFromJsonResult = json_decode($jsonResult->getContent());
+
+        $lastId = $taskFromJsonResult->id;
+
+        $this->assertSame(201, $jsonResult->getStatusCode());
+        $this->assertSame('Testing inclusion', $taskFromJsonResult->title);
+
+        return $lastId;
+    }
+
+    public function testListAll()
+    {
+        $jsonResult = $this->taskService->listAll();
+        $arrayFromJsonResult = json_decode($jsonResult->getContent());
+
+        $this->assertGreaterThan(1, count($arrayFromJsonResult));
+
+        $this->assertSame(200, $jsonResult->getStatusCode());
+    }
+
+    /**
+     * @depends testInsert
+     */
+    public function testGet($id)
+    {
+        $jsonResult = $this->taskService->get($id);
+
+        $taskFromJsonResult = json_decode($jsonResult->getContent());
+
+        $this->assertSame(200, $jsonResult->getStatusCode());
+        $this->assertSame('Testing inclusion', $taskFromJsonResult->title);
+        $this->assertSame($id, $taskFromJsonResult->id);
+
+        $jsonResult = $this->taskService->get(9999999);
+        $decodedJsonResult = json_decode($jsonResult->getContent());
+
+        $this->assertSame(404, $jsonResult->getStatusCode());
+        $this->assertSame('Task not found.', $decodedJsonResult->message);
+    }   
+}
