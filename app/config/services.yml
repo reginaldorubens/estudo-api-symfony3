@@ -44,4 +44,4 @@ services:
 
     auth_service:
         class:      AppBundle\Service\AuthService
-        arguments: [ "@security.password_encoder", "@user_service" ]
+        arguments: [ "@security.password_encoder", "@user_service", "@service_container" ]
