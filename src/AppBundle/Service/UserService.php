@@ -42,7 +42,7 @@ class UserService
 
 	public function getByUsername($username)
 	{
-		$user = $this->retrieveUserByUserName($Username);
+		$user = $this->retrieveUserByUserName($username);
 
     	if (is_null($user)) {
     		return new JsonResponse(['message' => 'Username not found.'], 404);
@@ -108,14 +108,14 @@ class UserService
 		return new JsonResponse(['message' => 'User deleted.'], 200);
 	}
 
-	private function retrieveUser($id)
+	public function retrieveUser($id)
 	{
 		return $this->em
     				->getRepository('AppBundle:User')
     				->findOneBy(['id' => $id]);
 	}
 
-	private function retrieveUserByUserName($username)
+	public function retrieveUserByUserName($username)
 	{
 		return $this->em
     				->getRepository('AppBundle:User')
