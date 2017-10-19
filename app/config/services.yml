@@ -36,3 +36,6 @@ services:
 
     AppBundle\Service\TaskService:
         arguments: [ "@doctrine.orm.entity_manager" ]
+
+    AppBundle\Service\UserService:
+        arguments: [ "@doctrine.orm.entity_manager", "@security.password_encoder" ]      

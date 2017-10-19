@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller\Api\v1;
 
-use AppBundle\Controller\RequestToJsonController;
+use AppBundle\Contract\RequestToJsonInterface;
 use AppBundle\Service\TaskService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-class TaskController extends Controller implements RequestToJsonController
+class TaskController extends Controller implements RequestToJsonInterface
 {
 	/**
      * @Route("/api/v1/task")

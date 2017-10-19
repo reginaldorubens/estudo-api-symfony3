@@ -1,11 +1,11 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Contract;
 
 /**
  * Interface used to convert $request content data to JSON (before Controller)
  */
-interface RequestToJsonController
+interface RequestToJsonInterface
 {
 	// empty body
 }

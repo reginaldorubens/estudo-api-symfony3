@@ -39,12 +39,15 @@ class TaskServiceTest extends WebTestCase
         return $lastId;
     }
 
+    /**
+     * @depends testInsert
+     */
     public function testListAll()
     {
         $jsonResult = $this->taskService->listAll();
         $arrayFromJsonResult = json_decode($jsonResult->getContent());
 
-        $this->assertGreaterThan(1, count($arrayFromJsonResult));
+        $this->assertGreaterThan(0, count($arrayFromJsonResult));
 
         $this->assertSame(200, $jsonResult->getStatusCode());
     }
@@ -66,6 +69,6 @@ class TaskServiceTest extends WebTestCase
         $decodedJsonResult = json_decode($jsonResult->getContent());
 
         $this->assertSame(404, $jsonResult->getStatusCode());
-        $this->assertSame('Task not found.', $decodedJsonResult->message);
+        $this->assertSame('Id not found.', $decodedJsonResult->message);
     }   
 }
