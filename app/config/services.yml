@@ -45,3 +45,7 @@ services:
     auth_service:
         class:      AppBundle\Service\AuthService
         arguments: [ "@security.password_encoder", "@user_service", "@service_container" ]
+
+    auth_subscriber:
+        class:      AppBundle\EventSubscriber\AuthSubscriber
+        arguments: [ "@service_container" ]
