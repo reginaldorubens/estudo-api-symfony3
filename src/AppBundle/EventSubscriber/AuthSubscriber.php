@@ -43,7 +43,7 @@ class AuthSubscriber implements EventSubscriberInterface
         $jwtSecretKey = $this->container->getParameter('secret');
         
         try {
-            JWT::$leeway = 60*60*24;
+            JWT::$leeway = 60 * 60 * 24;
             $decodedJWT = JWT::decode($headerWithoutBearer, $jwtSecretKey, ['HS256']);
         }  catch (\Exception $e) {
             $event->setController(

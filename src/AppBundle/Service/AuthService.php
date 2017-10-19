@@ -55,7 +55,7 @@ class AuthService
             "aud" => "https://github.com/reginaldorubens/test-api-restful-silex",
             "iat" => time(), // Issued At Time
             "nbf" => time(), // Not Before Time
-            "exp" => time()+60*60*24, // Expiration Time (24 hours)
+            "exp" => time() + 60 * 60 * 24, // Expiration Time (24 hours)
             "payload" => $this->formatTokenPayload($user)
         ];
 
