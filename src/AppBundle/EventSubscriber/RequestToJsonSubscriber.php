@@ -13,7 +13,7 @@ class RequestToJsonSubscriber implements EventSubscriberInterface
 {
 	public function onKernelController(FilterControllerEvent $event)
     {
-        if ($event->getRequest()->getMethod() == 'GET') {
+        if (in_array($event->getRequest()->getMethod(), ['GET', 'DELETE'])) {
             return;
         }
 

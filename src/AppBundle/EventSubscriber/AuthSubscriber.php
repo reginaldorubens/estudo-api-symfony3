@@ -22,8 +22,6 @@ class AuthSubscriber implements EventSubscriberInterface
 
 	public function onKernelController(FilterControllerEvent $event)
     {
-        return;
-        
         $controller = $this->getFirstController($event);
 
         if (($controller instanceof AuthController)) {
@@ -31,8 +29,6 @@ class AuthSubscriber implements EventSubscriberInterface
         }
         
         $rawHeader = $event->getRequest()->headers->get('Authorization');
-
-        return new JsonResponse($event->getRequest()->headers->all(), 200);
 
         if (strpos($rawHeader, 'Bearer ') === false) {
             $event->setController(
