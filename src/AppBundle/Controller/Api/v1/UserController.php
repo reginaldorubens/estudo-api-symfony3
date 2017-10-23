@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class UserController extends Controller implements RequestToJsonInterface
 {
 	/**
-     * @Route("/api/v1/user")
+     * @Route("/api/v1/users")
      * @Method("GET")
      */
 	public function listAll(UserService $userService)
@@ -22,7 +22,7 @@ class UserController extends Controller implements RequestToJsonInterface
 	}
 
 	/**
-     * @Route("/api/v1/user/{id}")
+     * @Route("/api/v1/users/{id}")
      * @Method("GET")
      */
 	public function retrieve(UserService $userService, $id)
@@ -31,7 +31,7 @@ class UserController extends Controller implements RequestToJsonInterface
 	}
 
 	/**
-     * @Route("/api/v1/user")
+     * @Route("/api/v1/users")
      * @Method("POST")
      */
 	public function insert(Request $request, UserService $userService)
@@ -40,7 +40,7 @@ class UserController extends Controller implements RequestToJsonInterface
 	}
 
 	/**
-     * @Route("/api/v1/user/{id}")
+     * @Route("/api/v1/users/{id}")
      * @Method("PUT")
      */
 	public function update(Request $request, UserService $userService, $id)
@@ -49,7 +49,7 @@ class UserController extends Controller implements RequestToJsonInterface
 	}
 
 	/**
-     * @Route("/api/v1/user/{id}")
+     * @Route("/api/v1/users/{id}")
      * @Method("DELETE")
      */
 	public function delete(UserService $userService, $id)

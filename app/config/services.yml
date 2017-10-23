@@ -36,7 +36,7 @@ services:
 
     task_service:
         class:      AppBundle\Service\TaskService
-        arguments: [ "@doctrine.orm.entity_manager" ]
+        arguments: [ "@doctrine.orm.entity_manager", "@service_container" ]
 
     user_service:
         class:      AppBundle\Service\UserService

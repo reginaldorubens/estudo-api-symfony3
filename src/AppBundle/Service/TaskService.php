@@ -5,14 +5,18 @@ namespace AppBundle\Service;
 use AppBundle\Entity\Task;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 
 class TaskService
 {
 	private $em;
+	private $container;
 
-	public function __construct(EntityManager $em)
+	public function __construct(EntityManager $em, Container $container)
 	{
 		$this->em = $em;
+		$this->container = $container;
 	}
 
 	public function listAll()
@@ -41,8 +45,15 @@ class TaskService
 	{
 		$task = new Task();
 	   	$task->setTitle($request->request->get('title'));
+	   	$task = $this->saveAndSerializeTask($task);
 
-		return new JsonResponse($this->saveAndSerializeTask($task), 201);
+	   	$urlToCreatedTask = $this->container->get('router')
+	   		->generate('get_task', ['id' => $task['id']], UrlGeneratorInterface::ABSOLUTE_URL);
+
+	   	$response = new JsonResponse($task, 201);
+	   	$response->headers->set('Location', $urlToCreatedTask);
+
+		return $response;
 	}
 
 	public function update($request, $id)

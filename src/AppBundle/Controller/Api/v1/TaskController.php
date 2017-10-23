@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class TaskController extends Controller implements RequestToJsonInterface
 {
 	/**
-     * @Route("/api/v1/task")
+     * @Route("/api/v1/tasks")
      * @Method("GET")
      */
 	public function listAll(TaskService $taskService)
@@ -22,7 +22,7 @@ class TaskController extends Controller implements RequestToJsonInterface
 	}
 
 	/**
-     * @Route("/api/v1/task/{id}")
+     * @Route("/api/v1/tasks/{id}", name="get_task")
      * @Method("GET")
      */
 	public function retrieve(TaskService $taskService, $id)
@@ -31,7 +31,7 @@ class TaskController extends Controller implements RequestToJsonInterface
 	}
 
 	/**
-     * @Route("/api/v1/task")
+     * @Route("/api/v1/tasks")
      * @Method("POST")
      */
 	public function insert(Request $request, TaskService $taskService)
@@ -40,7 +40,7 @@ class TaskController extends Controller implements RequestToJsonInterface
 	}
 
 	/**
-     * @Route("/api/v1/task/{id}")
+     * @Route("/api/v1/tasks/{id}")
      * @Method("PUT")
      */
 	public function update(Request $request, TaskService $taskService, $id)
@@ -49,7 +49,7 @@ class TaskController extends Controller implements RequestToJsonInterface
 	}
 
 	/**
-     * @Route("/api/v1/task/{id}")
+     * @Route("/api/v1/tasks/{id}")
      * @Method("DELETE")
      */
 	public function delete(TaskService $taskService, $id)
