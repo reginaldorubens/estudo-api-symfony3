@@ -13,10 +13,10 @@ use Firebase\JWT\JWT;
 class AuthService
 {
 	private $encoder;
-	private $userService; 
+	private $userService;
 	private $container;
 
-	public function __construct(PasswordEncoder $encoder, UserService $userService, 
+	public function __construct(PasswordEncoder $encoder, UserService $userService,
 		Container $container)
 	{
 		$this->encoder = $encoder;
@@ -60,7 +60,7 @@ class AuthService
         ];
 
         $jwtSecretKey = $this->container->getParameter('secret');
-        
+
         $token = JWT::encode($jsonObject, $jwtSecretKey);
 
 		return $token;

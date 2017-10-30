@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Api\v1;
 
 use AppBundle\Contract\RequestToJsonInterface;
+use AppBundle\Contract\AuthRequiredInterface;
 use AppBundle\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,7 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-class UserController extends Controller implements RequestToJsonInterface
+class UserController extends Controller implements RequestToJsonInterface, AuthRequiredInterface
 {
 	/**
      * @Route("/api/v1/users")
@@ -55,5 +56,5 @@ class UserController extends Controller implements RequestToJsonInterface
 	public function delete(UserService $userService, $id)
 	{
 		return $userService->delete($id);
-	}	
+	}
 }
