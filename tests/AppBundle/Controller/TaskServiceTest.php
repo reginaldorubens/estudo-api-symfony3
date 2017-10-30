@@ -20,7 +20,7 @@ class TaskServiceTest extends WebTestCase
             ->get('doctrine')
             ->getManager();
 
-        $this->taskService = new TaskService($this->em);
+        $this->taskService = new TaskService($this->em, static::$kernel->getContainer());
     }
 
     public function testInsert()
@@ -70,5 +70,5 @@ class TaskServiceTest extends WebTestCase
 
         $this->assertSame(404, $jsonResult->getStatusCode());
         $this->assertSame('Id not found.', $decodedJsonResult->message);
-    }   
+    }
 }

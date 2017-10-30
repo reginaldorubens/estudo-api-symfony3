@@ -52,7 +52,7 @@ class AuthService
 	{
 		$jsonObject = [
             "iss" => "reginaldorubens",
-            "aud" => "https://github.com/reginaldorubens/test-api-restful-silex",
+            "aud" => "https://github.com/reginaldorubens/estudo-api-symfony3/",
             "iat" => time(), // Issued At Time
             "nbf" => time(), // Not Before Time
             "exp" => time() + 60 * 60 * 24, // Expiration Time (24 hours)
