@@ -18,6 +18,16 @@ class BeforeControllersSubscriber extends BaseSubscriber
         $this->container = $container;
     }
 
+    public static function getSubscribedEvents()
+    {
+        return array(
+            KernelEvents::CONTROLLER => [
+                ['convertRequestToJSON', 10],
+                ['checkAuthentication', 0]
+            ],
+        );
+    }
+
 	public function checkAuthentication(FilterControllerEvent $event)
     {
         $parameters = [
@@ -70,16 +80,6 @@ class BeforeControllersSubscriber extends BaseSubscriber
         }
 
         $event->getRequest()->request->replace($content);
-    }
-
-    public static function getSubscribedEvents()
-    {
-        return array(
-            KernelEvents::CONTROLLER => [
-                ['convertRequestToJSON', 10],
-                ['checkAuthentication', 0]
-            ],
-        );
     }
 
     private function extractHeaderWithoutBearer($event)
