@@ -26,7 +26,7 @@ class AuthSubscriber implements EventSubscriberInterface
     {
         $controller = $this->getFirstController($event);
 
-        if (!$controller instanceof AuthRequiredInterface) {
+        if (!($controller instanceof AuthRequiredInterface)) {
             return;
         }
 
