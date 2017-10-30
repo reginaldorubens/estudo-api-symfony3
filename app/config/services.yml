@@ -40,12 +40,12 @@ services:
 
     user_service:
         class:      AppBundle\Service\UserService
-        arguments: [ "@doctrine.orm.entity_manager", "@security.password_encoder" ]      
+        arguments: [ "@doctrine.orm.entity_manager", "@security.password_encoder" ]
 
     auth_service:
         class:      AppBundle\Service\AuthService
         arguments: [ "@security.password_encoder", "@user_service", "@service_container" ]
 
-    auth_subscriber:
-        class:      AppBundle\EventSubscriber\AuthSubscriber
+    before_controllers_subscriber:
+        class:      AppBundle\EventSubscriber\BeforeControllersSubscriber
         arguments: [ "@service_container" ]

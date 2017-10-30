@@ -11,10 +11,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
+
+/**
+ * @Route("/api/v1/users")
+ */
 class UserController extends Controller implements RequestToJsonInterface, AuthRequiredInterface
 {
 	/**
-     * @Route("/api/v1/users")
+     * @Route("/")
      * @Method("GET")
      */
 	public function listAll(UserService $userService)
@@ -23,7 +27,7 @@ class UserController extends Controller implements RequestToJsonInterface, AuthR
 	}
 
 	/**
-     * @Route("/api/v1/users/{id}")
+     * @Route("/{id}")
      * @Method("GET")
      */
 	public function retrieve(UserService $userService, $id)
@@ -32,7 +36,7 @@ class UserController extends Controller implements RequestToJsonInterface, AuthR
 	}
 
 	/**
-     * @Route("/api/v1/users")
+     * @Route("/")
      * @Method("POST")
      */
 	public function insert(Request $request, UserService $userService)
@@ -41,7 +45,7 @@ class UserController extends Controller implements RequestToJsonInterface, AuthR
 	}
 
 	/**
-     * @Route("/api/v1/users/{id}")
+     * @Route("/{id}")
      * @Method("PUT")
      */
 	public function update(Request $request, UserService $userService, $id)
@@ -50,7 +54,7 @@ class UserController extends Controller implements RequestToJsonInterface, AuthR
 	}
 
 	/**
-     * @Route("/api/v1/users/{id}")
+     * @Route("/{id}")
      * @Method("DELETE")
      */
 	public function delete(UserService $userService, $id)
