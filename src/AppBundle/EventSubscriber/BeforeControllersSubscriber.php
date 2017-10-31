@@ -58,7 +58,7 @@ class BeforeControllersSubscriber extends BaseSubscriber
     {
         $parameters = [
             'requiredClassName' => 'AppBundle\Contract\RequestToJsonInterface',
-            'ignoreMethods' => ['GET', 'DETELE']
+            'ignoreMethods' => ['GET', 'DELETE']
         ];
 
         if (!$this->mustProcess($event, $parameters)) {
