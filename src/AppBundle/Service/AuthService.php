@@ -56,7 +56,7 @@ class AuthService
             "iat" => time(), // Issued At Time
             "nbf" => time(), // Not Before Time
             "exp" => time() + 60 * 60 * 24, // Expiration Time (24 hours)
-            "payload" => $this->formatTokenPayload($user)
+            "user" => $this->formatTokenUserData($user)
         ];
 
         $jwtSecretKey = $this->container->getParameter('secret');
@@ -66,13 +66,13 @@ class AuthService
 		return $token;
 	}
 
-	private function formatTokenPayload($user)
+	private function formatTokenUserData($user)
 	{
-		$payload = [
+		$userData = [
 			'id' => $user->getId(),
 			'username' => $user->getUsername()
 		];
 
-		return $payload;
+		return $userData;
 	}
 }
