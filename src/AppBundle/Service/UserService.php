@@ -21,7 +21,7 @@ class UserService
 	public function listAll()
 	{
 		$users = $this->serializeUsers(
-    		$this->retriveAllUsers()
+    		$this->retreiveAllUsers()
     	);
 
 		return new JsonResponse($users);
@@ -64,7 +64,7 @@ class UserService
 		$user = new User();
 	   	$user->setUsername($request->request->get('username'));
 
-	   	$hash = $this->encoder->encodePassword($user, 
+	   	$hash = $this->encoder->encodePassword($user,
 	   		$request->request->get('password'));
 		$user->setPassword($hash);
 
@@ -122,7 +122,7 @@ class UserService
     				->findOneBy(['username' => $username]);
 	}
 
-	private function retriveAllUsers()
+	private function retrieveAllUsers()
 	{
 		return $this->em
     				->getRepository('AppBundle:User')

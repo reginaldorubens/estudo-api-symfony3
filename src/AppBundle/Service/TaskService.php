@@ -22,7 +22,7 @@ class TaskService
 	public function listAll()
 	{
 		$tasks = $this->serializeTasks(
-    		$this->retriveAllTasks()
+    		$this->retrieveAllTasks()
     	);
 
 		return new JsonResponse($tasks);
@@ -97,7 +97,7 @@ class TaskService
     				->findOneBy(['id' => $id]);
 	}
 
-	private function retriveAllTasks()
+	private function retrieveAllTasks()
 	{
 		return $this->em
     				->getRepository('AppBundle:Task')
