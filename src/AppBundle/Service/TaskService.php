@@ -65,7 +65,7 @@ class TaskService
 		$task = $this->retrieveTask($id);
 
     	if (is_null($task)) {
-    		return new JsonResponse(['message' => 'Task deleted.'], 404);
+    		return new JsonResponse(['message' => 'Task not found.'], 404);
     	}
 
     	$task->setTitle($request->request->get('title'));

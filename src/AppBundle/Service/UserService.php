@@ -58,7 +58,8 @@ class UserService
 		$userAlreadyRegistered = $this->retrieveUserByUserName($request->request->get('username'));
 
 		if (!is_null($userAlreadyRegistered)) {
-			return new JsonResponse('Cannot be inserted. Username already in use.', 400);
+			return new JsonResponse(['message' =>
+                'Cannot be inserted. Username already in use.'], 400);
 		}
 
 		$user = new User();
