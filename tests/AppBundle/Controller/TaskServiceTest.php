@@ -16,11 +16,11 @@ class TaskServiceTest extends WebTestCase
     {
         self::bootKernel();
 
-        $this->em = static::$kernel->getContainer()
-            ->get('doctrine')
-            ->getManager();
+        $container = static::$kernel->getContainer();
 
-        $this->taskService = new TaskService($this->em, static::$kernel->getContainer());
+        $this->em = $container->get('doctrine')->getManager();
+
+        $this->taskService = new TaskService($this->em, $container);
     }
 
     public function testInsert()
